@@ -12,8 +12,6 @@ app.get('/v1/htmx/nav', (req, res) => {
 
     const activeItem = req.query.activeItem;
 
-    console.log(activeItem);
-
     // Read the HTML file asynchronously
     fs.readFile('components/nav.html', 'utf8', (err, data) => {
       if (err) {
@@ -22,32 +20,21 @@ app.get('/v1/htmx/nav', (req, res) => {
         return;
       }
 
-    // Load the HTML content into a cheerio object
-    const $ = cheerio.load(data);
+        if(activeItem) {
+            const $ = cheerio.load(data);
 
-    // Find the element based on its inner HTML (e.g., "Content goes here")
-    const targetElement = $('a').filter(function() {
-        return $(this).text().toLowerCase() === activeItem.toLowerCase();
-    });
+            const targetElement = $('a').filter(function() {
+                return $(this).text().toLowerCase() === activeItem.toLowerCase();
+            });
 
-    console.log(`a:contains("${activeItem}")`)
-    console.log(targetElement.html());
-
-    // Modify the class attribute of the found element
-    // Get the current class attribute value
-    let currentClass = targetElement.attr('class') || '';
-
-    // Append a new class name to the existing class (e.g., "new-class")
-    currentClass += ' active';
-
-    // Update the class attribute of the element with the new value
-    targetElement.attr('class', currentClass);
-
-    // Get the updated HTML content
-    const modifiedData = $.html();
-
-    // Send the HTML content as the response
-    res.send(modifiedData);
+            let currentClass = targetElement.attr('class') || '';
+            currentClass += ' active';
+            targetElement.attr('class', currentClass);
+            const modifiedData = $.html();
+            res.send(modifiedData);
+            return;
+        }
+        res.send(data);
     });
 });
 
