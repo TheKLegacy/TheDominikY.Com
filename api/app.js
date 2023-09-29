@@ -1,17 +1,32 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
-const cheerio = require('cheerio'); // Import the cheerio library
+const cheerio = require('cheerio');
 const port = 3000;
 
-// Define a route that returns a simple JSON response
-app.get('/v1/htmx/nav', (req, res) => {
+// Middleware to set cache control headers
+app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
+    next();
+});
 
+// Function to read and respond with an HTML file
+function sendHtmlFile(filePath, res) {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading HTML file:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        res.send(data);
+    });
+}
+
+// Define route for /v1/htmx/nav
+app.get('/v1/htmx/nav', (req, res) => {
     const activeItem = req.query.activeItem;
-
     fs.readFile('components/nav.html', 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading HTML file:', err);
@@ -19,10 +34,10 @@ app.get('/v1/htmx/nav', (req, res) => {
             return;
         }
 
-        if(activeItem) {
+        if (activeItem) {
             const $ = cheerio.load(data);
 
-            const targetElement = $('a').filter(function() {
+            const targetElement = $('a').filter(function () {
                 return $(this).text().toLowerCase() === activeItem.toLowerCase();
             });
 
@@ -31,47 +46,22 @@ app.get('/v1/htmx/nav', (req, res) => {
             targetElement.attr('class', currentClass);
             const modifiedData = $.html();
             res.send(modifiedData);
-            return;
+        } else {
+            res.send(data);
         }
-
-        res.send(data);
     });
 });
 
+// Define other routes
 app.get('/v1/htmx/footer', (req, res) => {
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-
-    fs.readFile('components/footer.html', 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading HTML file:', err);
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-        
-        res.send(data);
-    });
-}); 
+    sendHtmlFile('components/footer.html', res);
+});
 
 app.get('/v1/htmx/home/content', (req, res) => {
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-
-    fs.readFile('components/home/content.html', 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading HTML file:', err);
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-        
-        res.send(data);
-    });
-}); 
-  
+    sendHtmlFile('components/home/content.html', res);
+});
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
