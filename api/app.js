@@ -61,6 +61,18 @@ app.get('/v1/htmx/home/content', (req, res) => {
     sendHtmlFile('components/home/content.html', res);
 });
 
+app.get('/v1/htmx/projects/content', (req, res) => {
+    sendHtmlFile('components/projects/content.html', res);
+});
+
+app.get('/v1/htmx/about/content', (req, res) => {
+    sendHtmlFile('components/about/content.html', res);
+});
+
+app.get('/v1/htmx/resume/content', (req, res) => {
+    sendHtmlFile('components/resume/content.html', res);
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
