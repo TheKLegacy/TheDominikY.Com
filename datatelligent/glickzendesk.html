@@ -1,0 +1,28 @@
+<script>
+    
+const data = null;
+
+var result;
+
+const xhr = new XMLHttpRequest();
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(result = this.responseText);
+    document.getElementById('output').innerHTML = result;
+    console.log(typeof result)
+    result = JSON.parse(result.toString())
+    console.log(result);
+    console.log("Basic " + btoa("mike.barnette@glickco.com/token:CqPIxiCdoLTwpCDuwGdqmrb8KHavgdNrHzALcVjj"))
+  }
+});
+
+xhr.open("GET", "https://cors-anywhere.herokuapp.com/https://glick.zendesk.com/api/v2/tickets.json");
+xhr.setRequestHeader("Authorization", "Basic " + btoa("mike.barnette@glickco.com/token:CqPIxiCdoLTwpCDuwGdqmrb8KHavgdNrHzALcVjj"));
+xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+xhr.setRequestHeader("Accept", "application/json");
+xhr.send(data);
+
+</script>
+
+<textarea style="width: 100%; height: 100%;" id="output"></textarea>

@@ -1,0 +1,107 @@
+body {    
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh;
+}
+
+#content {
+  padding-top: 70px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+nav ul li a {
+   margin-left: 20px;
+}
+
+.card .card-footer {
+  text-align: center;
+}
+
+.card .card-footer .btn{
+  width: 12em;
+}
+
+.card {
+  margin: 20px;
+  height: 35em;
+  width: 320px; 
+}
+
+.card .card-body{
+  width: 320px;
+}
+
+/*Does this work?*/ 
+.card .card-body .card-text{
+  width: 100%;
+  height: auto;
+}
+
+.flex-deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.navbar-nav .nav-item .nav-link {
+  width: 140px;
+}
+
+footer {
+  margin-top: 0px;
+  bottom:0px;
+  width:100%;
+  height:60px;
+  color: #fff; 
+  padding-top: 20px;
+  background:#303030;
+  position: fixed;
+}
+
+#filter {
+  text-align: right;
+  margin-top: 56px;
+}
+
+#proj-head {
+  text-align: center;
+}
+
+header{
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.button {
+  background-color: #555555; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  display: block;
+}
+
+.button:hover {
+  background-color: #454545; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  display: block;
+}

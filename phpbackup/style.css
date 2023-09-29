@@ -1,0 +1,22 @@
+body {
+	color: #666666;
+	font-size: 13px;
+	font-family: Trebuchet, Verdana, Arial, Sans-Serif;
+	padding:0;
+	margin:0;
+	text-align: center;
+}
+
+
+.articles_in_body {
+	font-family:Trebuchet, Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#666666;
+	margin-left: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 625px;
+	background-image: url(/web/20190213085551im_/https://phpdatadyakoubek.000webhostapp.com/images/alt_news_bkg.html);
+	background-repeat: no-repeat;
+	background-position: center top;	
+}	
