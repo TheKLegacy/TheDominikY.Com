@@ -36,8 +36,9 @@
                         console.log("attempting ajax")
                         htmx.ajax({
                             url: apiEndpoint,
+                            target: mainContent, // Specify the target element
                             success: function (response) {
-                                // Replace the content of <main> with the API response
+                                // Content within the <main> element will be replaced
                                 mainContent.innerHTML = response;
                             }
                         });
