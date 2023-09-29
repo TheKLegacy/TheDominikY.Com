@@ -1,4 +1,4 @@
-<header>
+<header id="myHeader">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="mynav">
         <div class="container-fluid">
             <a class="navbar-brand" style="font-weight: 900;" href="index.html">[Dominik Yakoubek]</a>
@@ -7,9 +7,9 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="projects.html" hx-get="/api/v1/htmx/nav?activeItem=Projects" hx-target="nearest header">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html" hx-get="/api/v1/htmx/nav?activeItem=About me" hx-target="nearest header">About me</a></li>
-                    <li class="nav-item"><a class="nav-link" href="resume.html" hx-get="/api/v1/htmx/nav?activeItem=Resume" hx-target="nearest header">Resume</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html" hx-get="/api/v1/htmx/nav?activeItem=Projects" hx-target="#myHeader>Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html" hx-get="/api/v1/htmx/nav?activeItem=About me" hx-target="myHeader">About me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resume.html" hx-get="/api/v1/htmx/nav?activeItem=Resume" hx-target="myHeader">Resume</a></li>
                     <li class="nav-item"><a class="nav-link" href="https://github.com/TheKLegacy" target="_blank">Github</a></li>
                 </ul>
         </div>
