@@ -107,5 +107,5 @@ header{
 }
 
 .whitelink {
-  color: white;
+  color: white !important;
 }
