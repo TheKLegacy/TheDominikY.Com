@@ -12,14 +12,14 @@
         <link rel="stylesheet" type="text/css" href="globalstyle.css">
         <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
 </head>
-  <body>
-    <div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/nav" hx-trigger="load"></div>
-    <div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/home/content" hx-trigger="load"></div>
-    <div id="htmxFooter" hx-get="http://thedominiky.com/api/v1/htmx/footer" hx-trigger="load"></div>
-  </body>
-  <script>
-    function loadContent(apiEndpoint) {
-        htmx.ajax('GET', apiEndpoint, '#content');
+    <body>
+        <div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/nav" hx-trigger="load"></div>
+        <div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/home/content" hx-trigger="load"></div>
+        <div id="htmxFooter" hx-get="http://thedominiky.com/api/v1/htmx/footer" hx-trigger="load"></div>
+    </body>
+    <script>
+        function loadContent(apiEndpoint) {
+            htmx.ajax('GET', apiEndpoint, '#content');
     }
-</script>
+    </script>
 </html>
