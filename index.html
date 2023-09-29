@@ -31,18 +31,7 @@
 
                     const apiEndpoint = link.getAttribute('data-api-endpoint');
 
-                    if (apiEndpoint) {
-                        // Make an htmx request to the determined API endpoint
-                        console.log("attempting ajax")
-                        htmx.ajax({
-                            url: apiEndpoint,
-                            target: mainContent, // Specify the target element
-                            success: function (response) {
-                                // Content within the <main> element will be replaced
-                                mainContent.innerHTML = response;
-                            }
-                        });
-                    }
+                    htmx.ajax('GET', apiEndpoint, '#content')
                 });
             });
         });
