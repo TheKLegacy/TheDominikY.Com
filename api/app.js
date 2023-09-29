@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
-const port = 80;
+const port = 3000;
 
 // Define a route that returns a simple JSON response
 app.get('/v1/htmx/nav', (req, res) => {
