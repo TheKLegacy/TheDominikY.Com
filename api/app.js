@@ -12,13 +12,12 @@ app.get('/v1/htmx/nav', (req, res) => {
 
     const activeItem = req.query.activeItem;
 
-    // Read the HTML file asynchronously
     fs.readFile('components/nav.html', 'utf8', (err, data) => {
-      if (err) {
-        console.error('Error reading HTML file:', err);
-        res.status(500).send('Internal Server Error');
-        return;
-      }
+        if (err) {
+            console.error('Error reading HTML file:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
 
         if(activeItem) {
             const $ = cheerio.load(data);
@@ -34,6 +33,7 @@ app.get('/v1/htmx/nav', (req, res) => {
             res.send(modifiedData);
             return;
         }
+
         res.send(data);
     });
 });
@@ -43,15 +43,29 @@ app.get('/v1/htmx/footer', (req, res) => {
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
 
-    // Read the HTML file asynchronously
     fs.readFile('components/footer.html', 'utf8', (err, data) => {
         if (err) {
-        console.error('Error reading HTML file:', err);
-        res.status(500).send('Internal Server Error');
-        return;
+            console.error('Error reading HTML file:', err);
+            res.status(500).send('Internal Server Error');
+            return;
         }
         
-        // Send the HTML content as the response
+        res.send(data);
+    });
+}); 
+
+app.get('/v1/htmx/home/content', (req, res) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+
+    fs.readFile('components/home/content.html', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading HTML file:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        
         res.send(data);
     });
 }); 

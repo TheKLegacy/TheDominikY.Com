@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-        <title>Dominik Yakoubek's Portfolio :: Home</title>
+        <title>Dominik Yakoubek's Portfolio</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,51 +14,7 @@
 </head>
   <body>
     <div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/nav" hx-trigger="load"></div>
-      <main id="content">
-            <div class="flex-deck">
-                <div class="card">
-                    <img class="card-img-top" src="assets/imgs/dir.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h3 class="card-title">Project Directory</h3>
-                        <p class="card-text">This is a listing of all my completed, defunct, and ongoing projects. They can be searched, sorted, and filtered in a variety of ways.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="projects.html" class="btn btn-primary">Browse</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="assets/imgs/aboutme.jpeg" alt="Card image cap">
-                    <div class="card-body">
-                        <h3 class="card-title">About Me</h3>
-                        <p class="card-text">If you found your way here you may be interested in knowing more about me.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="about.html" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="rby2k20/images/FinalLogo.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h3 class="card-title">RBY2K20</h3>
-                        <p class="card-text">RBY2K20 is the my main side project. This is a generation 1 competitive pokemon comunity which I am the lead developer for.</p>
-                    </div>
-                    <div class="card-footer">
-                        <!--Comment Test-->
-                        <a target="_blank" href="https://rby2k20.com" class="btn btn-primary">Take a look</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="assets/imgs/bam.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h3 class="card-title">Featured Project</h3>
-                        <p class="card-text">BAM or Build a metagame, is a pokemon fan project I took a leadership role in. I joined this project in my sophomore year of highschool and took the role of the primary programmer.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a target="_blank" href="/bam/index4.html" class="btn btn-primary">Take a Peek</a>
-                    </div>
-                </div>
-            </div>
-    </main>
+    <div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/home/content" hx-trigger="load"></div>
     <div id="htmxFooter" hx-get="http://thedominiky.com/api/v1/htmx/footer" hx-trigger="load"></div>
   </body>
 </html>
