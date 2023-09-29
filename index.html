@@ -18,42 +18,33 @@
     <div id="htmxFooter" hx-get="http://thedominiky.com/api/v1/htmx/footer" hx-trigger="load"></div>
   </body>
 
-<script>
-    document.addEventListener('htmx:afterOnLoad', function(event) {
-        window.thisevent = event;
-        const requestUrl = event.detail.triggeringEvent.target.getAttribute('hx-get');
-        let apiUrl = '';
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mainContent = document.getElementById('content');
 
-        // Map the request URL to the corresponding API endpoint
-        switch (requestUrl) {
-            case 'http://thedominiky.com/api/v1/htmx/nav':
-                apiUrl = 'api/v1/htmx/home/content';
-                break;
-            case '/api/v1/htmx/nav?activeItem=Projects':
-                apiUrl = '/api/v1/htmx/projects/content';
-                break;
-            case '/api/v1/htmx/nav?activeItem=About me':
-                apiUrl = '/api/v1/htmx/about/content';
-                break;
-            case '/api/v1/htmx/nav?activeItem=Resume':
-                apiUrl = '/api/v1/htmx/resume/content';
-                break;
-            default:
-                // Handle default case or other URLs here
-                break;
-        }
+            navLinks.forEach(function (link) {
+                console.log("adding event")
+                link.addEventListener('click', function (event) {
+                    console.log("event triggered")
+                    event.preventDefault(); // Prevent the default link behavior
 
-        if (apiUrl !== '') {
-            // Make an htmx request to the determined API endpoint
-            htmx.ajax({
-                url: apiUrl,
-                success: function(response) {
-                    // Replace the content of <main> with the API response
-                    $('#content').html(response);
-                }
+                    const apiEndpoint = link.getAttribute('data-api-endpoint');
+
+                    if (apiEndpoint) {
+                        // Make an htmx request to the determined API endpoint
+                        console.log("attempting ajax")
+                        htmx.ajax({
+                            url: apiEndpoint,
+                            success: function (response) {
+                                // Replace the content of <main> with the API response
+                                mainContent.innerHTML = response;
+                            }
+                        });
+                    }
+                });
             });
-        }
-    });
-</script>
+        });
+    </script>
 
 </html>
