@@ -17,4 +17,42 @@
     <div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/home/content" hx-trigger="load"></div>
     <div id="htmxFooter" hx-get="http://thedominiky.com/api/v1/htmx/footer" hx-trigger="load"></div>
   </body>
+
+<script>
+    document.addEventListener('htmx:afterOnLoad', function(event) {
+        const requestUrl = event.detail.triggeringEvent.target.getAttribute('hx-get');
+        let apiUrl = '';
+
+        // Map the request URL to the corresponding API endpoint
+        switch (requestUrl) {
+            case 'http://thedominiky.com/api/v1/htmx/nav':
+                apiUrl = 'api/v1/htmx/home/content';
+                break;
+            case '/api/v1/htmx/nav?activeItem=Projects':
+                apiUrl = '/api/v1/htmx/projects/content';
+                break;
+            case '/api/v1/htmx/nav?activeItem=About me':
+                apiUrl = '/api/v1/htmx/about/content';
+                break;
+            case '/api/v1/htmx/nav?activeItem=Resume':
+                apiUrl = '/api/v1/htmx/resume/content';
+                break;
+            default:
+                // Handle default case or other URLs here
+                break;
+        }
+
+        if (apiUrl !== '') {
+            // Make an htmx request to the determined API endpoint
+            htmx.ajax({
+                url: apiUrl,
+                success: function(response) {
+                    // Replace the content of <main> with the API response
+                    $('#content').html(response);
+                }
+            });
+        }
+    });
+</script>
+
 </html>
