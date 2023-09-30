@@ -16,27 +16,22 @@
             &lt;script 
                 src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
-                crossorigin="anonymous"
-            &gt;&lt;/script&gt;
+                crossorigin="anonymous"&gt;&lt;/script&gt;
             &lt;script
                 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
                 integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-                crossorigin="anonymous"
-            &gt;&lt;/script&gt;
+                crossorigin="anonymous"&gt;&lt;/script&gt;
             &lt;script 
                 src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
-                crossorigin="anonymous"
-            &gt;&lt;/script&gt;
+                crossorigin="anonymous"&gt;&lt;/script&gt;
             &lt;link rel="stylesheet" type="text/css" href="globalstyle.css"&gt;
             &lt;script 
                 src="https://unpkg.com/htmx.org@1.9.6" 
                 integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
-                crossorigin="anonymous"
-            &gt;&lt;/script&gt;
+                crossorigin="anonymous"&gt;&lt;/script&gt;
             &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css"&gt;
-            &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"&gt;&lt;/script&gt;
-        &lt;/head&gt;
+            &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"&gt;&lt;/script&gt;&lt;/head&gt;
         &lt;body&gt;
             &lt;div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/nav" hx-trigger="load"&gt;&lt;/div&gt;
             &lt;div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/home/content" hx-trigger="load"&gt;&lt;/div&gt;
@@ -48,6 +43,96 @@
             }
         &lt;/script&gt;
     &lt;/html&gt;
+</code></pre>
+
+<p>
+Well, at least the entire front end. HTMX lets all of the html content be controled from the server. For examle here's the footer:
+</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-html">
+&lt;footer style="text-align: center;"&gt;
+    &lt;p style="font-size: small; font-family: sans-serif"&gt;Personal Portfolio of Dominik Yakoubek - Licensed under the GNU General Public License v3.0&lt;/p&gt;
+&lt;/footer&gt;
+</code></pre>
+
+<p>But how be I serve it? As i mentioed earlier I set up a pretty simple Node.js Express API here's almost the entire thing:</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javscript">
+const express = require('express');
+const app = express();
+const fs = require('fs');
+const cheerio = require('cheerio');
+const Html = require('./html');
+const Blog = require('./blog');
+const port = 3000;
+
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+}); 
+
+app.get('/v1/htmx/nav', (req, res) => {
+    //You'll see this later
+});
+
+app.get('/v1/htmx/footer', (req, res) => {
+    Html.sendHtmlFile('components/footer.html', res);
+});
+
+app.get('/v1/htmx/home/content', (req, res) => {
+    Html.sendHtmlFile('components/home/content.html', res);
+});
+
+app.get('/v1/htmx/projects/content', (req, res) => {
+    Html.sendHtmlFile('components/projects/content.html', res);
+});
+
+app.get('/v1/htmx/about/content', (req, res) => {
+    Html.sendHtmlFile('components/about/content.html', res);
+});
+
+app.get('/v1/htmx/resume/content', (req, res) => {
+    Html.sendHtmlFile('components/resume/content.html', res);
+});
+
+app.get('/v1/htmx/blog/content', (req, res) => {
+    Html.sendHtmlFile('components/blog/content.html', res);
+});
+
+app.get('/v1/htmx/blog/items', async (req, res) => {
+    //You'll see this later
+});
+
+app.get('/v1/htmx/blog/entry', async (req, res) => {
+    const id = req.query.id;
+    Html.sendHtmlFile(`components/blog/entries/${id}.html`,res);
+});
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+    
+</code></pre>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javscript">
+const fs = require('fs');
+
+class Html {
+    static sendHtmlFile(filePath, res) {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                console.error('Error reading HTML file:', err);
+                res.status(500).send('Internal Server Error');
+                return;
+            }
+            res.send(data);
+        });
+    }
+}
+
+module.exports = Html;
 </code></pre>
 
 <script>
