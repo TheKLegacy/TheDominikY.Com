@@ -66,12 +66,14 @@ app.get('/v1/htmx/blog/content', (req, res) => {
 
 app.get('/v1/htmx/blog/items', async (req, res) => {
     const filter = req.query.filter;
-    res.send(await Blog.getCards(filter))
+    const sort = req.query.sort;
+    console.log(sort);
+    res.send(await Blog.getCards(filter, sort))
 });
 
 app.get('/v1/htmx/blog/entry', async (req, res) => {
     const id = req.query.id;
-    res.send(await Blog.getEntry(id))
+    Html.sendHtmlFile(`components/blog/entries/${id}.html`,res);
 });
 
 

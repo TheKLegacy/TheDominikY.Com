@@ -49,7 +49,7 @@ nav ul li a {
 }
 
 .navbar-nav .nav-item .nav-link {
-  width: 140px;
+  width: 120px;
 }
 
 footer {
@@ -129,7 +129,8 @@ header{
 
 #blog-container {
   margin-left: 2em;
-  max-width: 70%;
+  max-width: 66%;
+  border: 1px solid black;
 }
 
 .blog-card {

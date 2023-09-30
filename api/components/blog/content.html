@@ -23,9 +23,6 @@
             </div>
             
             <div id="blog-container" class="main-content">
-                <!-- Your Main Content Goes Here -->
-                <h1>Main Content</h1>
-                <p>Your content goes here.</p>
             </div>
         </div>
     </div>
@@ -33,7 +30,7 @@
 
 <script>
     function loadBlogItems(search) {
-        htmx.ajax('GET', `/api/v1/htmx/blog/items?filter=${search}`, '#cards');
+        htmx.ajax('GET', `/api/v1/htmx/blog/items?filter=${search}&sort=${window.blogSorted}`, '#cards');
     }
 
     const searchInput = document.getElementById('searchInput');
@@ -42,4 +39,11 @@
         const searchTerm = this.value; 
         loadBlogItems(searchTerm);
     });
+
+    window.blogSorted = "desc"; 
+
+    function reorderBlogs() {
+        window.blogSorted === "desc" ? "asc" : "desc";
+        loadBlogItems(document.getElementById("searchInput").innerText);
+    }
 </script>
