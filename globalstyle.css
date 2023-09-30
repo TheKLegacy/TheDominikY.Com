@@ -144,7 +144,7 @@ header{
   overflow: hidden;
   text-overflow: ellipsis; 
   border-color: darkgrey;
-  border-radius: none !important;
+  border-radius: 0 !important;
 }
 
 #searchInput {

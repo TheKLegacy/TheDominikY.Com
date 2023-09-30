@@ -33,7 +33,7 @@
         htmx.ajax('GET', `/api/v1/htmx/blog/items?filter=${search}&sort=${window.blogSorted}`, '#cards');
     }
 
-    const searchInput = document.getElementById('searchInput');
+    var searchInput = document.getElementById('searchInput');
 
     searchInput.addEventListener('input', function () {
         const searchTerm = this.value; 
@@ -47,7 +47,7 @@
         loadBlogItems(document.getElementById("searchInput").value);
     }
 
-    const reverseSortButton = document.getElementById('reverseSortButton');
+    var reverseSortButton = document.getElementById('reverseSortButton');
 
     reverseSortButton.addEventListener('click', function(event) {
         reorderBlogs();
