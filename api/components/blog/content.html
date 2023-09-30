@@ -1,37 +1,35 @@
 <main id="content">
     <div class="container">
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
+            <div class="sidebar">
                 <nav id="sidebar" class="sidebar">
-                    <div class="position-sticky">
-                        <!-- Adjust the sidebar's size to fit the content -->
-                        <ul class="nav flex-column">
-                            <!-- Search Bar -->
-                            <li class="nav-item">
-                                <form class="form-inline my-2 my-lg-0">
-                                    <input class="form-control" type="search" id="searchInput" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-success my-2 my-sm-0">Reverse Sort</button>
-                                </form>
-                            </li>
-                            <!-- List of Cards (Scrollable) -->
-                            <li class="nav-item">
-                                <div class="overflow-auto" style="max-height: 400px;">
-                                    <div id="cards" hx-get="/api/v1/htmx/blog/items" hx-trigger="load"></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="nav flex-column">
+                        <!-- Search Bar -->
+                        <li class="nav-item">
+                            <form class="form-inline my-2 my-lg-0">
+                                <input class="form-control" type="search" id="searchInput" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0">Reverse Sort</button>
+                            </form>
+                        </li>
+                        <!-- List of Cards (Scrollable) -->
+                        <li class="nav-item">
+                            <div class="overflow-auto" style="max-height: 400px;">
+                                <div id="cards" hx-get="/api/v1/htmx/blog/items" hx-trigger="load"></div>
+                            </div>
+                        </li>
+                    </ul>
                 </nav>
-                <div id="blog-container">
-                    <!-- Your Main Content Goes Here -->
-                    <h1>Main Content</h1>
-                    <p>Your content goes here.</p>
-                </div>
+            </div>
+            
+            <div id="blog-container" class="main-content">
+                <!-- Your Main Content Goes Here -->
+                <h1>Main Content</h1>
+                <p>Your content goes here.</p>
             </div>
         </div>
-        <div class="row"></div>
+    </div>
 </main>
+
 <script>
     function loadBlogItems(search) {
         htmx.ajax('GET', `/api/v1/htmx/blog/items?filter=${search}`, '#cards');
