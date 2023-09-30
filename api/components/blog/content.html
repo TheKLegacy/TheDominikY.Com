@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <nav id="sidebar" class="col-lg-4 d-md-block bg-light sidebar">
                 <div class="position-sticky">
                     <!-- Adjust the sidebar's size to fit the content -->
                     <ul class="nav flex-column">
@@ -23,7 +23,7 @@
                 </div>
             </nav>
             <!-- Main Content -->
-            <main id="blog-container" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main id="blog-container" class="ms-sm-auto col-lg-8 px-md-4">
                 <!-- Your Main Content Goes Here -->
                 <h1>Main Content</h1>
                 <p>Your content goes here.</p>
@@ -33,7 +33,7 @@
 </main>
 <script>
     function loadBlogItems(search) {
-        htmx.ajax('GET', `/api/v1/htmx/blog/items?filter=${search}`, '#content');
+        htmx.ajax('GET', `/api/v1/htmx/blog/items?filter=${search}`, '#cards');
     }
 
     const searchInput = document.getElementById('searchInput');
