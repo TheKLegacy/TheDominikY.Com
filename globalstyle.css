@@ -139,6 +139,6 @@ header{
   text-overflow: ellipsis; 
 }
 
-.searchInput {
+#searchInput {
   margin-right: 1em;
 }
