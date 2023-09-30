@@ -134,5 +134,11 @@ header{
 .blog-card {
   margin: 0px;
   margin-right: 2px;
-  height: 10em;
+  max-height: 10em;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.searchInput {
+  margin-right: 1em;
 }
