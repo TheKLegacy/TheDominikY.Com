@@ -2,33 +2,36 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav id="sidebar" class="sidebar">
+            
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
-                    <!-- Adjust the sidebar's size to fit the content -->
-                    <ul class="nav flex-column">
-                        <!-- Search Bar -->
-                        <li class="nav-item">
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control" type="search" id="searchInput" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0">Reverse Sort</button>
-                            </form>
-                        </li>
-                        <!-- List of Cards (Scrollable) -->
-                        <li class="nav-item">
-                            <div class="overflow-auto" style="max-height: 400px;">
-                                <div id="cards" hx-get="/api/v1/htmx/blog/items" hx-trigger="load"></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <!-- Main Content -->
-            <main id="blog-container">
-                <!-- Your Main Content Goes Here -->
-                <h1>Main Content</h1>
-                <p>Your content goes here.</p>
-            </main>
+                    <nav id="sidebar" class="sidebar">
+                        <div class="position-sticky">
+                            <!-- Adjust the sidebar's size to fit the content -->
+                            <ul class="nav flex-column">
+                                <!-- Search Bar -->
+                                <li class="nav-item">
+                                    <form class="form-inline my-2 my-lg-0">
+                                        <input class="form-control" type="search" id="searchInput" placeholder="Search" aria-label="Search">
+                                        <button class="btn btn-outline-success my-2 my-sm-0">Reverse Sort</button>
+                                    </form>
+                                </li>
+                                <!-- List of Cards (Scrollable) -->
+                                <li class="nav-item">
+                                    <div class="overflow-auto" style="max-height: 400px;">
+                                        <div id="cards" hx-get="/api/v1/htmx/blog/items" hx-trigger="load"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                <!-- Main Content -->
+                <main id="blog-container">
+                    <!-- Your Main Content Goes Here -->
+                    <h1>Main Content</h1>
+                    <p>Your content goes here.</p>
+                </main>
+            </div>
         </div>
     </div>
 </main>
