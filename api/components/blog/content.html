@@ -8,7 +8,7 @@
                         <li class="nav-item">
                             <form class="form-inline my-2 my-lg-0">
                                 <input class="form-control" type="search" id="searchInput" placeholder="Search" aria-label="Search"> 
-                                <button class="btn btn-outline-success my-2 my-sm-0">Reverse Sort</button>
+                                <button id="reverseSortButton" class="btn btn-outline-success my-2 my-sm-0" type="button">Reverse Sort</button>
                             </form>
                         </li>
                         <br/>
@@ -43,14 +43,13 @@
     window.blogSorted = "desc"; 
 
     function reorderBlogs() {
-        window.blogSorted === "desc" ? "asc" : "desc";
+        window.blogSorted  = window.blogSorted === "desc" ? "asc" : "desc";
         loadBlogItems(document.getElementById("searchInput").innerText);
     }
 
-    const searchForm = document.getElementById('searchForm');
+    const reverseSortButton = document.getElementById('reverseSortButton');
 
-    searchForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission behavior
+    reverseSortButton.addEventListener('click', function(event) {
         reorderBlogs();
     });
 

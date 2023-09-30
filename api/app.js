@@ -67,7 +67,6 @@ app.get('/v1/htmx/blog/content', (req, res) => {
 app.get('/v1/htmx/blog/items', async (req, res) => {
     const filter = req.query.filter;
     const sort = req.query.sort;
-    console.log(sort);
     res.send(await Blog.getCards(filter, sort))
 });
 
