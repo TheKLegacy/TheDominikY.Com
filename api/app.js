@@ -69,6 +69,12 @@ app.get('/v1/htmx/blog/items', async (req, res) => {
     res.send(await Blog.getCards(filter))
 });
 
+app.get('/v1/htmx/blog/entry', async (req, res) => {
+    const id = req.query.id;
+    res.send(await Blog.getEntry(id))
+});
+
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
