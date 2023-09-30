@@ -129,7 +129,7 @@ header{
 
 #blog-container {
   margin-left: 2em;
-  max-width: 66%;
+  max-width:75%;
   min-width: 66%;
   border: 1px solid darkgrey;
   border-radius: 8px;
@@ -155,4 +155,8 @@ header{
 
 #blog-wrapper {
   max-width: 90%;
+}
+
+pre code {
+  font-size: 80%;
 }
