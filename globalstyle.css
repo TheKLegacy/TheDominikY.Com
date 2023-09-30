@@ -126,3 +126,7 @@ header{
 #content .container .row > .col-md-10 {
   width: auto; /* Adjust the width as needed */
 }
+
+#blog-container {
+  margin-left: 2em;
+}
