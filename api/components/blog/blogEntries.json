@@ -2,16 +2,16 @@
     {
         "id": 0,
         "date": "9/29/23",
-        "displayTitle": "Title 1"
+        "displayTitle": "Hello World"
     },
     {
         "id": 1,
         "date": "9/29/23",
-        "displayTitle": "Title 2"
+        "displayTitle": "About this site"
     },
     {
         "id": 2,
         "date": "9/29/23",
-        "displayTitle": "Title 3"
+        "displayTitle": "About the blog system"
     }
 ]
