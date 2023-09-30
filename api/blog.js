@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 
 class Blog {
-    static async getCards(filter, asce) {
+    static async getCards(filter, sort) {
         try {
             const data = await fs.readFile('components/blog/blogEntries.json', 'utf8');
             const jsonData = JSON.parse(data);
@@ -14,7 +14,7 @@ class Blog {
             const sortedEntries = filteredEntries.sort((a, b) => {
                 const dateA = new Date(a.date);
                 const dateB = new Date(b.date);
-                return asce === 'asc' ? dateA - dateB : dateB - dateA;
+                return sort === 'asc' ? dateA - dateB : dateB - dateA;
             });
 
             sortedEntries.forEach(bmd => {
