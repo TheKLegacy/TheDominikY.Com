@@ -110,17 +110,19 @@ header{
   color: white !important;
 }
 
-/* Custom CSS to place sidebar and main content next to each other */
-.container .row {
+#content .container .row {
   display: flex;
   flex-wrap: wrap;
 }
 
-.sidebar {
-  flex: 0 0 25%; /* Adjust the width as needed */
-  margin-right: 20px; /* Add spacing between sidebar and main content */
+#content .container .row > div {
+  flex: 0 0 auto;
 }
 
-.main-content {
-  flex: 0 0 75%; /* Adjust the width as needed */
+#content .container .row > .col-md-1 {
+  width: auto; /* Adjust the width as needed */
+}
+
+#content .container .row > .col-md-10 {
+  width: auto; /* Adjust the width as needed */
 }
