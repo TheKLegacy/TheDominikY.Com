@@ -129,6 +129,7 @@ header{
 
 #blog-container {
   margin-left: 2em;
+  max-width: 70%;
 }
 
 .blog-card {
