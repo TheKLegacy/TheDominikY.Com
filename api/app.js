@@ -65,7 +65,8 @@ app.get('/v1/htmx/blog/content', (req, res) => {
 });
 
 app.get('/v1/htmx/blog/items', async (req, res) => {
-    res.send(await Blog.getCards())
+    const filter = req.query.filter;
+    res.send(await Blog.getCards(filter))
 });
 
 app.listen(port, () => {

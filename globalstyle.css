@@ -134,6 +134,7 @@ header{
 .blog-card {
   margin: 0px;
   margin-right: 2px;
+  height: auto;
   max-height: 10em;
   overflow: hidden;
   text-overflow: ellipsis; 
