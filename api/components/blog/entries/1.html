@@ -264,13 +264,13 @@ class Blog {
 
             sortedEntries.forEach(bmd => {
                 cards += `
-                <div class="card blog-card" hx-get="/api/v1/htmx/blog/entry?id=${bmd.id}" hx-target="#blog-container" hx-swap="inner-html">
-                    <div class="card-body">
-                        <h5 class="card-title">${bmd.date}</h5>
-                        <p class="card-text">${bmd.displayTitle}</p>
-                    </div>
-                </div>
-                `;
+                &lt;div class="card blog-card" hx-get="/api/v1/htmx/blog/entry?id=${bmd.id}" hx-target="#blog-container" hx-swap="inner-html"&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;h5 class="card-title"&gt;${bmd.date}&lt;/h5&gt;
+                        &lt;p class="card-text"&gt;${bmd.displayTitle}&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                `;                
             });
 
             return cards;
