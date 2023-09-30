@@ -130,3 +130,7 @@ header{
 #blog-container {
   margin-left: 2em;
 }
+
+.blog-card {
+  padding: 0px;
+}
