@@ -131,8 +131,8 @@ header{
   margin-left: 2em;
   max-width: 66%;
   min-width: 66%;
-  border: 2px solid black;
-  border-radius: 2px;
+  border: 2px solid #555555;
+  border-radius: 8px;
   padding: 1em;
 }
 
@@ -143,6 +143,7 @@ header{
   max-height: 10em;
   overflow: hidden;
   text-overflow: ellipsis; 
+  border-color: #555555
 }
 
 #searchInput {
