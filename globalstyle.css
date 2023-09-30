@@ -134,6 +134,8 @@ header{
   border: 1px solid darkgrey;
   border-radius: 8px;
   padding: 1em;
+  max-height: 42em;
+  overflow-y: scroll
 }
 
 .blog-card {
@@ -149,4 +151,8 @@ header{
 
 #searchInput {
   margin-right: 1em;
+}
+
+#blog-wrapper {
+  max-width: 90%;
 }
