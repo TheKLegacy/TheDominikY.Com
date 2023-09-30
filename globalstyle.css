@@ -113,3 +113,12 @@ header{
 .blog-card {
   margin: 0px;
 }
+
+#content .container-fluid .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#content .container-fluid .row > div {
+  flex: 0 0 auto;
+}
