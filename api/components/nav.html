@@ -8,6 +8,7 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" hx-get="/api/v1/htmx/nav?activeItem=Projects" hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/projects/content')">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" hx-get="/api/v1/htmx/nav?activeItem=Blog" hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/blog/content')">Resume</a></li>
                     <li class="nav-item"><a class="nav-link" hx-get="/api/v1/htmx/nav?activeItem=About me" hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/about/content')">About me</a></li>
                     <li class="nav-item"><a class="nav-link" hx-get="/api/v1/htmx/nav?activeItem=Resume" hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/resume/content')">Resume</a></li>
                     <li class="nav-item"><a class="nav-link" href="https://github.com/TheKLegacy" target="_blank">Github</a></li>

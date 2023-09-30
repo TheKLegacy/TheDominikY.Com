@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+    <head>
         <title>Dominik Yakoubek's Portfolio</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="globalstyle.css">
         <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
-</head>
+    </head>
     <body>
         <div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/nav" hx-trigger="load"></div>
         <div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/home/content" hx-trigger="load"></div>
@@ -20,6 +20,6 @@
     <script>
         function loadContent(apiEndpoint) {
             htmx.ajax('GET', apiEndpoint, '#content');
-    }
+        }
     </script>
 </html>

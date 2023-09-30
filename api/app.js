@@ -2,29 +2,17 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const cheerio = require('cheerio');
+const Html = require('./html');
+const Blog = require('./blog');
 const port = 3000;
 
-// Middleware to set cache control headers
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
     next();
-});
+}); 
 
-// Function to read and respond with an HTML file
-function sendHtmlFile(filePath, res) {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading HTML file:', err);
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-        res.send(data);
-    });
-}
-
-// Define route for /v1/htmx/nav
 app.get('/v1/htmx/nav', (req, res) => {
     const activeItem = req.query.activeItem;
     fs.readFile('components/nav.html', 'utf8', (err, data) => {
@@ -52,28 +40,34 @@ app.get('/v1/htmx/nav', (req, res) => {
     });
 });
 
-// Define other routes
 app.get('/v1/htmx/footer', (req, res) => {
-    sendHtmlFile('components/footer.html', res);
+    Html.sendHtmlFile('components/footer.html', res);
 });
 
 app.get('/v1/htmx/home/content', (req, res) => {
-    sendHtmlFile('components/home/content.html', res);
+    Html.sendHtmlFile('components/home/content.html', res);
 });
 
 app.get('/v1/htmx/projects/content', (req, res) => {
-    sendHtmlFile('components/projects/content.html', res);
+    Html.sendHtmlFile('components/projects/content.html', res);
 });
 
 app.get('/v1/htmx/about/content', (req, res) => {
-    sendHtmlFile('components/about/content.html', res);
+    Html.sendHtmlFile('components/about/content.html', res);
 });
 
 app.get('/v1/htmx/resume/content', (req, res) => {
-    sendHtmlFile('components/resume/content.html', res);
+    Html.sendHtmlFile('components/resume/content.html', res);
 });
 
-// Start the server
+app.get('/v1/htmx/blog/content', (req, res) => {
+    Html.sendHtmlFile('components/blog/content.html', res);
+});
+
+app.get('/v1/htmx/blog/items', async (req, res) => {
+    res.send(await Blog.getCards())
+});
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });

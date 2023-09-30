@@ -1,0 +1,55 @@
+<main id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <section class="text-centered">
+                    <h1>My Blog</h1>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- Sidebar -->
+                            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                                <div class="position-sticky">
+                                    <ul class="nav flex-column">
+                                        <!-- Search Bar -->
+                                        <li class="nav-item">
+                                            <form class="form-inline my-2 my-lg-0">
+                                                <input class="form-control" type="search" id="searchInput" placeholder="Search" aria-label="Search">
+                                                <button class="btn btn-outline-success my-2 my-sm-0">Reverse Sort</button>
+                                            </form>
+                                        </li>
+                                        <!-- List of Cards (Scrollable) -->
+                                        <li class="nav-item">
+                                            <div class="overflow-auto" style="max-height: 400px;">
+                                                <div id="cards" hx-get="/api/v1/htmx/blog/items" hx-trigger="load"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <!-- Main Content -->
+                            <main id="blog-container" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                                <!-- Your Main Content Goes Here -->
+                                <h1>Main Content</h1>
+                                <p>Your content goes here.</p>
+                            </main>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row"></div>
+    </div>
+</main>
+<script>
+    function loadBlogItems(search) {
+        htmx.ajax('GET', `/api/v1/htmx/blog/items?filter=${search}`, '#content');
+    }
+
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('input', function () {
+        const searchTerm = this.value; 
+        loadBlogItems(searchTerm);
+    });
+</script>
