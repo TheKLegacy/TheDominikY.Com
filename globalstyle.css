@@ -115,10 +115,10 @@ header{
 }
 
 #content .container-fluid .row {
-  display: flex;
-  flex-wrap: wrap;
+  display: flex !important; 
+  flex-wrap: wrap !important;
 }
 
 #content .container-fluid .row > div {
-  flex: 0 0 auto;
+  flex: 0 0 auto !important;
 }
