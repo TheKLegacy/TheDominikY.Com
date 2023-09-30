@@ -55,9 +55,9 @@ Well, at least the entire front end. HTMX lets all of the html content be contro
 &lt;/footer&gt;
 </code></pre>
 
-<p>But how be I serve it? As i mentioed earlier I set up a pretty simple Node.js Express API here's almost the entire thing:</p>
+<p>But how do I serve it? As i mentioed earlier I set up a pretty simple Node.js Express API here's almost the entire thing:</p>
 
-<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javscript">
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javascript">
 const express = require('express');
 const app = express();
 const fs = require('fs');
@@ -116,7 +116,7 @@ app.listen(port, () => {
     
 </code></pre>
 
-<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javscript">
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javascript">
 const fs = require('fs');
 
 class Html {
