@@ -1,5 +1,6 @@
+<h1>My hacky little blog system</h1>
 <p>Here's how the blog system works.</p>
-<p>First we have a little json to create store the contents of this list:</p>
+<p>First we have a little json to store the contents of this list:</p>
 
 <pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-json">
 [
@@ -21,7 +22,7 @@
 ]
 </code></pre>
 
-<p>That gives us all we need to create an endpoint that generates sortable and filterable cards that can then use htmx so load in the corresponding blog:</p>
+<p>That gives us all we need to create an endpoint that generates sortable and filterable cards that can then use htmx to load in the corresponding blog:</p>
 
 <pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javascript">
 app.get('/v1/htmx/blog/items', async (req, res) => {
