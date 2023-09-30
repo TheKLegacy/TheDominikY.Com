@@ -44,7 +44,7 @@
 
     function reorderBlogs() {
         window.blogSorted  = window.blogSorted === "desc" ? "asc" : "desc";
-        loadBlogItems(document.getElementById("searchInput").innerText);
+        loadBlogItems(document.getElementById("searchInput").value);
     }
 
     const reverseSortButton = document.getElementById('reverseSortButton');
