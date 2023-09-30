@@ -46,4 +46,12 @@
         window.blogSorted === "desc" ? "asc" : "desc";
         loadBlogItems(document.getElementById("searchInput").innerText);
     }
+
+    const searchForm = document.getElementById('searchForm');
+
+    searchForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+        reorderBlogs();
+    });
+
 </script>
