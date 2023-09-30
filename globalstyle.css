@@ -130,8 +130,10 @@ header{
 #blog-container {
   margin-left: 2em;
   max-width: 66%;
-  width: 66%;
-  border: 1px solid black;
+  min-width: 66%;
+  border: 2px solid black;
+  border-radius: 2px;
+  padding: 1em;
 }
 
 .blog-card {
