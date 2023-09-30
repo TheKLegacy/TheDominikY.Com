@@ -110,15 +110,6 @@ header{
   color: white !important;
 }
 
-.blog-card {
-  margin: 0px;
-}
-
-#content .container-fluid .row {
-  display: flex !important; 
-  flex-wrap: wrap !important;
-}
-
-#content .container-fluid .row > div {
-  flex: 0 0 auto !important;
+#sidebar {
+  display: inline-block !important;
 }
