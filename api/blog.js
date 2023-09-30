@@ -14,7 +14,7 @@ class Blog {
 
             filteredEntries.forEach(bmd => {
                 cards += `
-                <div class="card blog-card" hx-get="/api/v1/htmx/blog/entry?id=${bmd.id}" hx-target="#blog-container hx-swap="inner-html"">
+                <div class="card blog-card" hx-get="/api/v1/htmx/blog/entry?id=${bmd.id}" hx-target="#blog-container" hx-swap="inner-html">
                     <div class="card-body">
                         <h5 class="card-title">${bmd.date}</h5>
                         <p class="card-text">${bmd.displayTitle}</p>
