@@ -109,3 +109,7 @@ header{
 .whitelink {
   color: white !important;
 }
+
+.blog-card {
+  margin: 0px;
+}

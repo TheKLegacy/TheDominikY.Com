@@ -10,7 +10,7 @@ class Blog {
 
             jsonData.forEach(bmd => {
                 cards += `
-                <div class="card" hx-get="/api/v1/htmx/blog/entry?=${bmd.id}" hx-target="#blog-container">
+                <div class="card blog-card" hx-get="/api/v1/htmx/blog/entry?=${bmd.id}" hx-target="#blog-container">
                     <div class="card-body">
                         <h5 class="card-title">${bmd.date}</h5>
                         <p class="card-text">${bmd.displayTitle}</p>
