@@ -133,5 +133,6 @@ header{
 
 .blog-card {
   margin: 0px;
-  margin-right: .25em;
+  margin-right: 2px;
+  height: 1em;
 }
