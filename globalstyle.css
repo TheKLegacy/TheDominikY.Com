@@ -11,7 +11,7 @@ body {
 }
 
 nav ul li a {
-   margin-left: 20px;
+   text-align: center;
 }
 
 .card .card-footer {
