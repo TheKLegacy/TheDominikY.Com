@@ -13,5 +13,15 @@
         "id": 2,
         "date": "9/30/23",
         "displayTitle": "About the blog system"
+    },
+    {
+        "id": 3,
+        "date": "10/1/23",
+        "displayTitle": "Plans"
+    },
+    {
+        "id": 4,
+        "date": "9/30/23",
+        "displayTitle": "Oops"
     }
 ]
