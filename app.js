@@ -44,24 +44,24 @@ app.get('/v1/htmx/footer', (req, res) => {
     Html.sendHtmlFile('components/footer.html', res);
 });
 
-app.get('/v1/htmx/home/content', (req, res) => {
-    Html.sendHtmlWithPushUrl('components/home/content.html', res, '/home');
+app.get('/', (req, res) => {
+    Html.constructStandardPage("home", res);
 });
 
 app.get('/v1/htmx/projects/content', (req, res) => {
-    Html.sendHtmlWithPushUrl('components/projects/content.html', res, '/projects');
+    Html.constructStandardPage("projects", res);
 });
 
 app.get('/v1/htmx/about/content', (req, res) => {
-    Html.sendHtmlWithPushUrl('components/about/content.html', res, '/about');
+    Html.constructStandardPage("about", res);
 });
 
 app.get('/v1/htmx/resume/content', (req, res) => {
-    Html.sendHtmlWithPushUrl('components/resume/content.html', res, '/resume');
+    Html.constructStandardPage("resume", res);
 });
 
 app.get('/v1/htmx/blog/content', (req, res) => {
-    Html.sendHtmlWithPushUrl('components/blog/content.html', res, '/blog');
+    Html.constructStandardPage("blog", res);
 });
 
 app.get('/v1/htmx/blog/items', async (req, res) => {
@@ -73,10 +73,6 @@ app.get('/v1/htmx/blog/items', async (req, res) => {
 app.get('/v1/htmx/blog/entry', async (req, res) => {
     const id = req.query.id;
     Html.sendHtmlFile(`components/blog/entries/${id}.html`,res);
-});
-
-app.get('/test', async (req, res) => {
-    Html.constructStandardPage("home", res);
 });
 
 
