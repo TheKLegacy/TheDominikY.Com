@@ -14,7 +14,7 @@ class Html {
 
     static sendHtmlWithPushUrl(filePath, res, path) {
         res.setHeader('HX-Push-Url', path);
-        sendHtmlFile(filePath, res);
+        this.sendHtmlFile(filePath, res);
     }
 }
 
