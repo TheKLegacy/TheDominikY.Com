@@ -55,7 +55,7 @@ class Html {
             const $ = cheerio.load(navHtml);
     
             const targetElement = $('a').filter(function () {
-                return $(this).text().toLowerCase() === activeItem.toLowerCase();
+                return $(this).text().toLowerCase().includes(activeItem.toLowerCase());
             });
     
             let currentClass = targetElement.attr('class') || '';
