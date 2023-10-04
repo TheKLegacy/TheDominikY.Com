@@ -1,0 +1,217 @@
+<h1>About my website</h1>
+<p>So you want to know more about my website?</p>
+<p>It's a pretty simple portfolio site. It was originally made with Jeykll when I was in college as part of a class. Four years later (today) It needed a refresh, so I remade the entire thing with htmx and updated the content</p>
+<p>For the backend all I just made a small node.js express API. earlier today it was just to seve html for htmx, but now it does some cool stuff with the blog system. Check out my next post to learn about that.</p>
+<p>Here's the entire website:</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-html">
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+        &lt;head&gt;
+            &lt;title&gt;Dominik Yakoubek's Portfolio&lt;/title&gt;
+            &lt;meta charset="utf-8"&gt;
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+            &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
+            &lt;link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"&gt;
+            &lt;script 
+                src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+                crossorigin="anonymous"&gt;&lt;/script&gt;
+            &lt;script
+                src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"&gt;&lt;/script&gt;
+            &lt;script 
+                src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
+                crossorigin="anonymous"&gt;&lt;/script&gt;
+            &lt;link rel="stylesheet" type="text/css" href="globalstyle.css"&gt;
+            &lt;script 
+                src="https://unpkg.com/htmx.org@1.9.6" 
+                integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+                crossorigin="anonymous"&gt;&lt;/script&gt;
+            &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css"&gt;
+            &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"&gt;&lt;/script&gt;&lt;/head&gt;
+        &lt;body&gt;
+            &lt;div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/nav" hx-trigger="load"&gt;&lt;/div&gt;
+            &lt;div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/home/content" hx-trigger="load"&gt;&lt;/div&gt;
+            &lt;div id="htmxFooter" hx-get="http://thedominiky.com/api/v1/htmx/footer" hx-trigger="load"&gt;&lt;/div&gt;
+        &lt;/body&gt;
+        &lt;script&gt;
+            function loadContent(apiEndpoint) {
+                htmx.ajax('GET', apiEndpoint, '#content');
+            }
+        &lt;/script&gt;
+    &lt;/html&gt;
+</code></pre>
+
+<p>
+Well, at least the entire front end. HTMX lets all of the html content be controled from the server. For examle here's the footer:
+</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-html">
+&lt;footer style="text-align: center;"&gt;
+    &lt;p style="font-size: small; font-family: sans-serif"&gt;Personal Portfolio of Dominik Yakoubek - Licensed under the GNU General Public License v3.0&lt;/p&gt;
+&lt;/footer&gt;
+</code></pre>
+
+<p>But how do I serve it? As I mentioned earlier I set up a pretty simple Node.js Express API. Here's almost the entire thing:</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javascript">
+const express = require('express');
+const app = express();
+const fs = require('fs');
+const cheerio = require('cheerio');
+const Html = require('./html');
+const Blog = require('./blog');
+const port = 3000;
+
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+}); 
+
+app.get('/v1/htmx/nav', (req, res) => {
+    //You'll see this later
+});
+
+app.get('/v1/htmx/footer', (req, res) => {
+    Html.sendHtmlFile('components/footer.html', res);
+});
+
+app.get('/v1/htmx/home/content', (req, res) => {
+    Html.sendHtmlFile('components/home/content.html', res);
+});
+
+app.get('/v1/htmx/projects/content', (req, res) => {
+    Html.sendHtmlFile('components/projects/content.html', res);
+});
+
+app.get('/v1/htmx/about/content', (req, res) => {
+    Html.sendHtmlFile('components/about/content.html', res);
+});
+
+app.get('/v1/htmx/resume/content', (req, res) => {
+    Html.sendHtmlFile('components/resume/content.html', res);
+});
+
+app.get('/v1/htmx/blog/content', (req, res) => {
+    Html.sendHtmlFile('components/blog/content.html', res);
+});
+
+app.get('/v1/htmx/blog/items', async (req, res) => {
+    //You'll see this later
+});
+
+app.get('/v1/htmx/blog/entry', async (req, res) => {
+    const id = req.query.id;
+    Html.sendHtmlFile(`components/blog/entries/${id}.html`,res);
+});
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+    
+</code></pre>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javascript">
+const fs = require('fs');
+
+class Html {
+    static sendHtmlFile(filePath, res) {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                console.error('Error reading HTML file:', err);
+                res.status(500).send('Internal Server Error');
+                return;
+            }
+            res.send(data);
+        });
+    }
+}
+
+module.exports = Html;
+</code></pre>
+
+<p>See? Super simple. Just read the html file and give it the the server. And you notice in the last endpoint you can pass in a query parameter to get a specific file.</p>
+<p>We have a bit more fun with the nav bar. I want to show which menu item is active so I need to pass a query paramter to dynamically change the content:</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javascript">
+app.get('/v1/htmx/nav', (req, res) => {
+    const activeItem = req.query.activeItem;
+    fs.readFile('components/nav.html', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading HTML file:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        if (activeItem) {
+            const $ = cheerio.load(data);
+
+            const targetElement = $('a').filter(function () {
+                return $(this).text().toLowerCase() === activeItem.toLowerCase();
+            });
+
+            let currentClass = targetElement.attr('class') || '';
+            currentClass += ' active';
+            targetElement.attr('class', currentClass);
+            const modifiedData = $.html();
+            res.send(modifiedData);
+        } else {
+            res.send(data);
+        }
+    });
+});
+</code></pre>
+
+<p>All of that sends us the following.</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-html">
+&lt;header id="myHeader"&gt;
+    &lt;nav class="navbar navbar-expand-md navbar-dark bg-dark" id="mynav"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand whitelink" style="font-weight: 900;"
+                hx-get="http://thedominiky.com/api/v1/htmx/nav"
+                hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/home/content')"
+            &gt;[Dominik Yakoubek]&lt;/a&gt;
+            &lt;button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavbar"
+            &gt;
+                &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;div class="collapse navbar-collapse" id="collapsibleNavbar"&gt;
+                &lt;ul class="navbar-nav"&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link"
+                        hx-get="/api/v1/htmx/nav?activeItem=Projects"
+                        hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/projects/content')"
+                    &gt;Projects&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link"
+                        hx-get="/api/v1/htmx/nav?activeItem=Blog"
+                        hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/blog/content')"
+                    &gt;Blog&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link"
+                        hx-get="/api/v1/htmx/nav?activeItem=About me"
+                        hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/about/content')"
+                    &gt;About me&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link"
+                        hx-get="/api/v1/htmx/nav?activeItem=Resume"
+                        hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/resume/content')"
+                    &gt;Resume&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="https://github.com/TheKLegacy" target="_blank"&gt;Github&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+</code></pre>
+
+<p>Notice how we have more htmx calls in the header, and we also have a onclick function to make two calls at the same. This lets us update the nav and update the content at the same time.</p>
+
+<script>
+    hljs.highlightAll();
+</script>
+    
+
