@@ -5,7 +5,7 @@ const Handlebars = require("handlebars");
 
 class Html {
     static async sendHtmlFile(filePath, res) {
-        data = await this.loadHtmlFile(filePath);
+        const data = await this.loadHtmlFile(filePath);
         res.send(data);
     }
 
@@ -15,7 +15,7 @@ class Html {
             const template = Handlebars.compile(data);
     
             const navHtml = await this.loadHtmlFile('components/nav.html');
-            const modifiedNavHtml = await this.modifyNavHtml(navHtml, page); // Pass page as activeItem
+            const modifiedNavHtml = await this.modifyNavHtml(navHtml, page);
             const contentHtml = await this.loadHtmlFile(`components/${page}/content.html`);
             const footerHtml = await this.loadHtmlFile('components/footer.html');
     
@@ -38,6 +38,7 @@ class Html {
     static async loadHtmlFile(path) {
         try {
             const data = await fs.promises.readFile(path, 'utf8');
+            console.log(data)
             return he.decode(data);
         } catch (error) {
             console.error('Error reading HTML file:', error);
