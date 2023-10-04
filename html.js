@@ -4,14 +4,9 @@ const cheerio = require('cheerio');
 const Handlebars = require("handlebars");
 
 class Html {
-    static sendHtmlFile(filePath, res) {
-        data = this.loadHtmlFile(filePath);
+    static async sendHtmlFile(filePath, res) {
+        data = await this.loadHtmlFile(filePath);
         res.send(data);
-    }
-
-    static sendHtmlWithPushUrl(filePath, res, path) {
-        res.setHeader('HX-Push-Url', path);
-        this.sendHtmlFile(filePath, res);
     }
 
     static async constructStandardPage(page, res) {
