@@ -5,7 +5,7 @@ const Handlebars = require("handlebars");
 
 class Html {
     static async sendHtmlFile(filePath, res) {
-        const data = await this.loadHtmlFile(filePath);
+        const data = await this.loadHtmlFile(filePath, false);
         res.send(data);
     }
 
@@ -35,11 +35,11 @@ class Html {
         }
     }    
     
-    static async loadHtmlFile(path) {
+    static async loadHtmlFile(path, shouldDecode = true) {
         try {
-            const data = await fs.promises.readFile(path, 'utf8');
-            console.log(data)
-            return he.decode(data);
+            let data = await fs.promises.readFile(path, 'utf8');
+            data = shouldDecode? he.decode(data) : data;
+            return data
         } catch (error) {
             console.error('Error reading HTML file:', error);
             throw error; 
