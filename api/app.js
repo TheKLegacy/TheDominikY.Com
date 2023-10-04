@@ -45,23 +45,23 @@ app.get('/v1/htmx/footer', (req, res) => {
 });
 
 app.get('/v1/htmx/home/content', (req, res) => {
-    Html.sendHtmlFile('components/home/content.html', res);
+    Html.sendHtmlWithPushUrl('components/home/content.html', res, '/home');
 });
 
 app.get('/v1/htmx/projects/content', (req, res) => {
-    Html.sendHtmlFile('components/projects/content.html', res);
+    Html.sendHtmlWithPushUrl('components/projects/content.html', res, '/projects');
 });
 
 app.get('/v1/htmx/about/content', (req, res) => {
-    Html.sendHtmlFile('components/about/content.html', res);
+    Html.sendHtmlWithPushUrl('components/about/content.html', res, '/about');
 });
 
 app.get('/v1/htmx/resume/content', (req, res) => {
-    Html.sendHtmlFile('components/resume/content.html', res);
+    Html.sendHtmlWithPushUrl('components/resume/content.html', res, '/resume');
 });
 
 app.get('/v1/htmx/blog/content', (req, res) => {
-    Html.sendHtmlFile('components/blog/content.html', res);
+    Html.sendHtmlWithPushUrl('components/blog/content.html', res, '/blog');
 });
 
 app.get('/v1/htmx/blog/items', async (req, res) => {

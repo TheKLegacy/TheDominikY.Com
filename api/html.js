@@ -11,6 +11,12 @@ class Html {
             res.send(data);
         });
     }
+
+    static sendHtmlWithPushUrl(filePath, res, path) {
+        res.setHeader('HX-Push-Url', path);
+        sendHtmlFile(filePath, res);
+    }
 }
+
 
 module.exports = Html;
