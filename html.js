@@ -13,7 +13,7 @@ class Html {
         this.sendHtmlFile(filePath, res);
     }
 
-    static async constructStandardPage(page) {
+    static async constructStandardPage(page, res) {
         try {
             const data = await this.loadHtmlFile('components/baseSite.html');
             const template = Handlebars.compile(data);
@@ -30,7 +30,10 @@ class Html {
             };
     
             const html = template(params);
-            return html;
+
+            res.setHeader('Content-Type', 'text/html');
+
+            res.send(html);
         } catch (error) {
             console.error('Error constructing standard page:', error);
             throw error;

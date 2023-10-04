@@ -76,8 +76,7 @@ app.get('/v1/htmx/blog/entry', async (req, res) => {
 });
 
 app.get('/test', async (req, res) => {
-    res.setHeader('Content-Type', 'text/html');
-    res.send(await Html.constructStandardPage("home"));
+    Html.constructStandardPage("home", res);
 });
 
 
