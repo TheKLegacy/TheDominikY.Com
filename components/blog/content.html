@@ -15,7 +15,7 @@
                         <!-- List of Cards (Scrollable) -->
                         <li class="nav-item">
                             <div class="overflow-auto" style="max-height: 400px;">
-                                <div id="cards" hx-get="/api/v1/htmx/blog/items" hx-trigger="load"></div>
+                                <div id="cards" hx-get="/../v1/htmx/blog/items" hx-trigger="load"></div>
                             </div>
                         </li>
                     </ul>
@@ -23,7 +23,7 @@
             </div>
             
             <div id="blog-container" class="main-content">
-                <div class="card blog-card" hx-get="/api/v1/htmx/blog/entry?id=1" hx-target="#blog-container" hx-trigger="load" hx-swap="inner-html"></div>
+                <div class="card blog-card" hx-get="/../v1/htmx/blog/entry?id=1" hx-target="#blog-container" hx-trigger="load" hx-swap="inner-html"></div>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
 
 <script>
     function loadBlogItems(search) {
-        htmx.ajax('GET', `/api/v1/htmx/blog/items?filter=${search}&sort=${window.blogSorted}`, '#cards');
+        htmx.ajax('GET', `/../v1/htmx/blog/items?filter=${search}&sort=${window.blogSorted}`, '#cards');
     }
 
     var searchInput = document.getElementById('searchInput');

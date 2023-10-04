@@ -33,9 +33,9 @@
             &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css"&gt;
             &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"&gt;&lt;/script&gt;&lt;/head&gt;
         &lt;body&gt;
-            &lt;div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/nav" hx-trigger="load"&gt;&lt;/div&gt;
-            &lt;div id="htmxHeader" hx-get="http://thedominiky.com/api/v1/htmx/home/content" hx-trigger="load"&gt;&lt;/div&gt;
-            &lt;div id="htmxFooter" hx-get="http://thedominiky.com/api/v1/htmx/footer" hx-trigger="load"&gt;&lt;/div&gt;
+            &lt;div id="htmxHeader" hx-get="http://thedominiky.com/../v1/htmx/nav" hx-trigger="load"&gt;&lt;/div&gt;
+            &lt;div id="htmxHeader" hx-get="http://thedominiky.com/../v1/htmx/home/content" hx-trigger="load"&gt;&lt;/div&gt;
+            &lt;div id="htmxFooter" hx-get="http://thedominiky.com/../v1/htmx/footer" hx-trigger="load"&gt;&lt;/div&gt;
         &lt;/body&gt;
         &lt;script&gt;
             function loadContent(apiEndpoint) {
@@ -174,8 +174,8 @@ app.get('/v1/htmx/nav', (req, res) => {
     &lt;nav class="navbar navbar-expand-md navbar-dark bg-dark" id="mynav"&gt;
         &lt;div class="container-fluid"&gt;
             &lt;a class="navbar-brand whitelink" style="font-weight: 900;"
-                hx-get="http://thedominiky.com/api/v1/htmx/nav"
-                hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/home/content')"
+                hx-get="http://thedominiky.com/../v1/htmx/nav"
+                hx-target="#myHeader" onclick="loadContent('/../v1/htmx/home/content')"
             &gt;[Dominik Yakoubek]&lt;/a&gt;
             &lt;button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#collapsibleNavbar"
@@ -185,20 +185,20 @@ app.get('/v1/htmx/nav', (req, res) => {
             &lt;div class="collapse navbar-collapse" id="collapsibleNavbar"&gt;
                 &lt;ul class="navbar-nav"&gt;
                     &lt;li class="nav-item"&gt;&lt;a class="nav-link"
-                        hx-get="/api/v1/htmx/nav?activeItem=Projects"
-                        hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/projects/content')"
+                        hx-get="/../v1/htmx/nav?activeItem=Projects"
+                        hx-target="#myHeader" onclick="loadContent('/../v1/htmx/projects/content')"
                     &gt;Projects&lt;/a&gt;&lt;/li&gt;
                     &lt;li class="nav-item"&gt;&lt;a class="nav-link"
-                        hx-get="/api/v1/htmx/nav?activeItem=Blog"
-                        hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/blog/content')"
+                        hx-get="/../v1/htmx/nav?activeItem=Blog"
+                        hx-target="#myHeader" onclick="loadContent('/../v1/htmx/blog/content')"
                     &gt;Blog&lt;/a&gt;&lt;/li&gt;
                     &lt;li class="nav-item"&gt;&lt;a class="nav-link"
-                        hx-get="/api/v1/htmx/nav?activeItem=About me"
-                        hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/about/content')"
+                        hx-get="/../v1/htmx/nav?activeItem=About me"
+                        hx-target="#myHeader" onclick="loadContent('/../v1/htmx/about/content')"
                     &gt;About me&lt;/a&gt;&lt;/li&gt;
                     &lt;li class="nav-item"&gt;&lt;a class="nav-link"
-                        hx-get="/api/v1/htmx/nav?activeItem=Resume"
-                        hx-target="#myHeader" onclick="loadContent('/api/v1/htmx/resume/content')"
+                        hx-get="/../v1/htmx/nav?activeItem=Resume"
+                        hx-target="#myHeader" onclick="loadContent('/../v1/htmx/resume/content')"
                     &gt;Resume&lt;/a&gt;&lt;/li&gt;
                     &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="https://github.com/TheKLegacy" target="_blank"&gt;Github&lt;/a&gt;&lt;/li&gt;
                 &lt;/ul&gt;

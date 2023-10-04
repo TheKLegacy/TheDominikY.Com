@@ -54,7 +54,7 @@ class Blog {
 
             sortedEntries.forEach(bmd => {
                 cards += `
-                &lt;div class="card blog-card" hx-get="/api/v1/htmx/blog/entry?id=${bmd.id}" hx-target="#blog-container" hx-swap="inner-html"&gt;
+                &lt;div class="card blog-card" hx-get="/../v1/htmx/blog/entry?id=${bmd.id}" hx-target="#blog-container" hx-swap="inner-html"&gt;
                     &lt;div class="card-body"&gt;
                         &lt;h5 class="card-title"&gt;${bmd.date}&lt;/h5&gt;
                         &lt;p class="card-text"&gt;${bmd.displayTitle}&lt;/p&gt;
@@ -95,7 +95,7 @@ module.exports = Blog;
                         &lt;!-- List of Cards (Scrollable) --&gt;
                         &lt;li class="nav-item"&gt;
                             &lt;div class="overflow-auto" style="max-height: 400px;"&gt;
-                                &lt;div id="cards" hx-get="/api/v1/htmx/blog/items" hx-trigger="load"&gt;&lt;/div&gt;
+                                &lt;div id="cards" hx-get="/../v1/htmx/blog/items" hx-trigger="load"&gt;&lt;/div&gt;
                             &lt;/div&gt;
                         &lt;/li&gt;
                     &lt;/ul&gt;
@@ -110,7 +110,7 @@ module.exports = Blog;
 
 &lt;script&gt;
     function loadBlogItems(search) {
-        htmx.ajax('GET', `/api/v1/htmx/blog/items?filter=${search}&amp;sort=${window.blogSorted}`, '#cards');
+        htmx.ajax('GET', `/../v1/htmx/blog/items?filter=${search}&amp;sort=${window.blogSorted}`, '#cards');
     }
 
     var searchInput = document.getElementById('searchInput');
