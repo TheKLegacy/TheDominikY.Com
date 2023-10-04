@@ -48,19 +48,19 @@ app.get('/', (req, res) => {
     Html.constructStandardPage("home", res);
 });
 
-app.get('/v1/htmx/projects/content', (req, res) => {
+app.get('/projects', (req, res) => {
     Html.constructStandardPage("projects", res);
 });
 
-app.get('/v1/htmx/about/content', (req, res) => {
+app.get('/about', (req, res) => {
     Html.constructStandardPage("about", res);
 });
 
-app.get('/v1/htmx/resume/content', (req, res) => {
+app.get('/resume', (req, res) => {
     Html.constructStandardPage("resume", res);
 });
 
-app.get('/v1/htmx/blog/content', (req, res) => {
+app.get('/blog', (req, res) => {
     Html.constructStandardPage("blog", res);
 });
 
