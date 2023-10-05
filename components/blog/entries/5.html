@@ -1,0 +1,183 @@
+<p>So i kinda rewrote everything again.....</p>
+<p>Okay, not everything, but a lot. Before I basically was using htmx to build a spa. While this was cooling I missed hte ability to directly link to pages of my app.</p>
+<p>Ultimetly what I decided what I wanted to do was have a single get endpoint that generated the page and returned it to the browser.</p>
+<p>To acheive this I used handlebars to do templating, and created a function to insert the content into a base page.</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javascript">
+const express = require('express');
+const app = express();
+const Html = require('./html');
+const Blog = require('./blog');
+const port = 3000;
+
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+}); 
+
+app.get('/v1/htmx/footer', (req, res) => {
+    Html.sendHtmlFile('components/footer.html', res);
+});
+
+app.get('/', (req, res) => {
+    Html.constructStandardPage("home", res);
+});
+
+app.get('/projects', (req, res) => {
+    Html.constructStandardPage("projects", res);
+});
+
+app.get('/about', (req, res) => {
+    Html.constructStandardPage("about", res);
+});
+
+app.get('/resume', (req, res) => {
+    Html.constructStandardPage("resume", res);
+});
+
+app.get('/blog', (req, res) => {
+    Html.constructStandardPage("blog", res);
+});
+
+app.get('/v1/htmx/blog/items', async (req, res) => {
+    const filter = req.query.filter;
+    const sort = req.query.sort;
+    res.send(await Blog.getCards(filter, sort))
+});
+
+app.get('/v1/htmx/blog/entry', async (req, res) => {
+    const id = req.query.id;
+    Html.sendHtmlFile(`components/blog/entries/${id}.html`,res);
+});
+
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});            
+</code></pre>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javascript">
+const fs = require('fs');
+const he = require('he'); 
+const cheerio = require('cheerio');
+const Handlebars = require("handlebars");
+
+class Html {
+    static async sendHtmlFile(filePath, res) {
+        const data = await this.loadHtmlFile(filePath, false);
+        res.send(data);
+    }
+
+    static async constructStandardPage(page, res) {
+        try {
+            const data = await this.loadHtmlFile('components/baseSite.html');
+            const template = Handlebars.compile(data);
+    
+            const navHtml = await this.loadHtmlFile('components/nav.html');
+            const modifiedNavHtml = await this.modifyNavHtml(navHtml, page);
+            const contentHtml = await this.loadHtmlFile(`components/${page}/content.html`);
+    
+            const params = {
+                nav: modifiedNavHtml,
+                content: contentHtml
+            };
+    
+            const html = template(params);
+    
+            res.setHeader('Content-Type', 'text/html');
+            res.send(html);
+        } catch (error) {
+            console.error('Error constructing standard page:', error);
+            throw error;
+        }
+    }    
+    
+    static async loadHtmlFile(path, shouldDecode = true) {
+        try {
+            let data = await fs.promises.readFile(path, 'utf8');
+            data = shouldDecode? he.decode(data) : data;
+            return data
+        } catch (error) {
+            console.error('Error reading HTML file:', error);
+            throw error; 
+        }
+    }
+
+    static async modifyNavHtml(navHtml, activeItem) {
+        try {
+            const $ = cheerio.load(navHtml);
+    
+            const targetElement = $('a').filter(function () {
+                return $(this).text().toLowerCase().includes(activeItem.toLowerCase());
+            });
+    
+            let currentClass = targetElement.attr('class') || '';
+            currentClass += ' active';
+            targetElement.attr('class', currentClass);
+    
+            return $.html();
+        } catch (error) {
+            console.error('Error modifying nav HTML:', error);
+            throw error;
+        }
+    }
+}
+
+module.exports = Html;
+</code></pre>
+    
+<p>Note a few things. We set content-type to text/html. We also keep the active logic by making use of which endpoint the call came from. We also need to decode the template to keep is valid HTML for the browser. Finally we moved all the logic to html.js, app.js only has the API endpoints now.</p>
+
+<p>Let's take a look at the new nav now:</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-html">
+    &lt;header id="myHeader"&gt;
+    &lt;nav class="navbar navbar-expand-md navbar-dark bg-dark" id="mynav"&gt;
+        &lt;div class="container-fluid" hx-boost="true"&gt;
+            &lt;a class="navbar-brand whitelink" style="font-weight: 900;" href="/"&gt;[Dominik Yakoubek]&lt;/a&gt;
+            &lt;button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"&gt;
+            &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;div class="collapse navbar-collapse" id="collapsibleNavbar"&gt;
+                &lt;ul class="navbar-nav"&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="/projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="/blog"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="/about"&gt;About me&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="/resume"&gt;Resume&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="https://github.com/TheKLegacy" target="_blank"&gt;Github&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+</code></pre>
+    
+<p>Notice we get rid of that dumb js call we make to refresh the content at the same time we refresh the header. Now we just have a simple href to the page we want, which let's us use the back button and link to specific pages</p>
+<p>Don't worry though. We still do some htmx magic. Notice hx-boost="true" in the container-fluid div. That basically makes it so that all the links inside of that div use ajax to refresh the content of the page, but if js is disabled it will use the normal href as a fallback.</p>
+<p>Here's the base site btw:</p>
+
+<pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-html">
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang=&quot;en&quot;&gt;
+        &lt;head&gt;
+            &lt;title&gt;Dominik Yakoubek's Portfolio&lt;/title&gt;
+            &lt;meta charset=&quot;utf-8&quot;&gt;
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+            &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css&quot;&gt;
+            &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css&quot;&gt;
+            &lt;script src=&quot;https://code.jquery.com/jquery-3.3.1.slim.min.js&quot; integrity=&quot;sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+            &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js&quot; integrity=&quot;sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+            &lt;script src=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js&quot; integrity=&quot;sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+            &lt;script src=&quot;https://unpkg.com/htmx.org@1.9.6&quot; integrity=&quot;sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+            &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css&quot;&gt;
+            &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js&quot;&gt;&lt;/script&gt;
+            &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../assets/globalstyle.css&quot;&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            {{{nav}}}
+            {{{content}}}
+        &lt;/body&gt;
+    &lt;/html&gt;
+    </code></pre>
