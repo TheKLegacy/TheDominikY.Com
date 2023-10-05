@@ -248,3 +248,27 @@ pre code {
 .card-footer {
   border-top: 0px;
 }
+
+#blog-wrapper .card {
+  transition: background-color 0.3s ease; /* Add a transition for background-color */
+}
+
+#blog-wrapper .card:hover {
+  background-color: #333940; /* New background color on hover */
+}
+
+#blog-wrapper .card:hover .card-text {
+  font-size: 1.4em; /* Increase the font size of .card-text on hover */
+}
+
+#blog-wrapper .card .card-text {
+  transition: font-size .3s; /* Increase the font size of .card-text on hover */
+}
+
+#blog-wrapper .card:hover .card-title {
+  font-size: 1.4em; /* Increase the font size of .card-text on hover */
+}
+
+#blog-wrapper .card .card-title {
+  transition: font-size .3s; /* Increase the font size of .card-text on hover */
+}
