@@ -17,12 +17,10 @@ class Html {
             const navHtml = await this.loadHtmlFile('components/nav.html');
             const modifiedNavHtml = await this.modifyNavHtml(navHtml, page);
             const contentHtml = await this.loadHtmlFile(`components/${page}/content.html`);
-            const footerHtml = await this.loadHtmlFile('components/footer.html');
     
             const params = {
                 nav: modifiedNavHtml,
-                content: contentHtml,
-                footer: footerHtml
+                content: contentHtml
             };
     
             const html = template(params);
