@@ -200,16 +200,16 @@ pre code {
   max-height: 400px; /* Maximum height of the scrollable container */
 }
 
-#banner-wrapper .card {
+.card {
   background-color: #282C34; /* Card background color */
-  border: 4px solid white; /* Card border */
-  border-radius: 4em;
-  margin-bottom: 2em; /* Spacing between cards */
   color: white;
 }
 
-.card {
+#banner-wrapper .card {
   background-color: #282C34; /* Card background color */
+  border: 4px solid white; /* Card border */
+  border-radius: 4em !important;
+  margin-bottom: 2em !important; /* Spacing between cards */
   color: white;
 }
 
