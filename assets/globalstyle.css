@@ -205,7 +205,7 @@ pre code {
   color: white;
 }
 
-#banner-wrapper .card {
+#blog-wrapper .card {
   background-color: #282C34; /* Card background color */
   border: 4px solid white; /* Card border */
   border-radius: 4em !important;
