@@ -54,31 +54,12 @@ const projects = [
             "Roguelike game made in Unity and C# as a senior project in high school with my good friend Rishi Patel. The game had a combat system, leveling, shopping, and dungeoneering.",
     },
     {
-        id: "space-invaders",
-        name: "Space Invaders",
-        createDate: "2016",
-        stopDate: "2016",
-        lang: ["HTML5", "JavaScript", "Phaser.js"],
-        image: "assets/imgs/spaceinvaders.jpg",
-        description: "A Space Invaders clone built using Phaser.js framework.",
-    },
-    {
-        id: "breakout",
-        name: "Breakout",
-        createDate: "2016",
-        stopDate: "2016",
-        lang: ["HTML5", "JavaScript", "Phaser.js"],
-        image: "assets/imgs/breakout.jpg",
-        description:
-            "A classic Breakout/Arkanoid style game created with Phaser.js.",
-    },
-    {
         id: "multiplayer-ctf-paintball",
         name: "Multi-Player CTF Paintball",
         createDate: "2017",
         stopDate: "2017",
         lang: ["Unity", "C#"],
-        image: "assets/imgs/paintball.jpg",
+        image: "assets/imgs/unityctf.png",
         description:
             "A multiplayer Capture The Flag paintball game developed in Unity.",
     },
