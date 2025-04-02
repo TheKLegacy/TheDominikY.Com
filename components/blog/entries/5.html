@@ -1,6 +1,6 @@
-<p>So i kinda rewrote everything again.....</p>
-<p>Okay, not everything, but a lot. Before I basically was using htmx to build a spa. While this was cooling I missed hte ability to directly link to pages of my app.</p>
-<p>Ultimetly what I decided what I wanted to do was have a single get endpoint that generated the page and returned it to the browser.</p>
+<h1>So I kinda rewrote everything again.....</h1>
+<p>Okay, not everything, but a lot. Before I basically was using htmx to build a spa. While this was cool I missed the ability to directly link to pages of my app.</p>
+<p>Ultimately what I decided what I wanted to do was have a single get endpoint that generated the page and returned it to the browser.</p>
 <p>To acheive this I used handlebars to do templating, and created a function to insert the content into a base page.</p>
 
 <pre hx-disable class="theme-atom-one-dark shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-javascript">
@@ -154,7 +154,7 @@ module.exports = Html;
 &lt;/header&gt;
 </code></pre>
     
-<p>Notice we get rid of that dumb js call we make to refresh the content at the same time we refresh the header. Now we just have a simple href to the page we want, which let's us use the back button and link to specific pages</p>
+<p>Notice we get rid of that dumb js call we make to refresh the content at the same time we refresh the header. Now we just have a simple href to the page we want, which lets us use the back button and link to specific pages</p>
 <p>Don't worry though. We still do some htmx magic. Notice hx-boost="true" in the container-fluid div. That basically makes it so that all the links inside of that div use ajax to refresh the content of the page, but if js is disabled it will use the normal href as a fallback.</p>
 <p>Here's the base site btw:</p>
 
