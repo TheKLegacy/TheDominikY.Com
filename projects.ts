@@ -12,15 +12,27 @@ interface Project {
 
 const projects: Project[] = [
     {
+        id: "fantasy-draftr",
+        name: "Fantasy Draftr",
+        createDate: "2025",
+        stopDate: "2100",
+        lang: ["AG Grid", "TypeScript", "JavaScript","Firebase", "React", "Material UI"],
+        image: "assets/imgs/bamhub.jpg",
+        description:
+            "Build a metagame (BAM) is a Pokémon fakedex focused on creating a new competitive Pokémon metagame. We have our own forum and Pokédex and once was planned to be functioning on Pokémon Showdown. [THIS IS NOW DEFUNCT] To view the archived version",
+        link: "/bam/index4.html",
+        linkText: "click here",
+    },
+    {
         id: "build-a-metagame",
         name: "Build A Metagame",
         createDate: "2015",
         stopDate: "2018",
         lang: ["HTML5", "CSS3", "JavaScript"],
-        image: "assets/imgs/bamhub.jpg",
+        image: "assets/imgs/drafterredraft.png",
         description:
-            "Build a metagame (BAM) is a Pokémon fakedex focused on creating a new competitive Pokémon metagame. We have our own forum and Pokédex and once was planned to be functioning on Pokémon Showdown. [THIS IS NOW DEFUNCT] To view the archived version",
-        link: "/bam/index4.html",
+            "Fantasy Draftr is a fantasy football web application that allows users to create and manage fantasy football boards with real-time player statistics and interactive drafting features.",
+        link: "fantasydraftr.com",
         linkText: "click here",
     },
     {
