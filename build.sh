@@ -1,10 +1,15 @@
 #!/bin/bash
 
-echo "Building and starting the API..."
+# Find the PID of the Node.js dist/app.js process
+PID=$(ps aux | grep '[n]ode dist/app.js' | awk '{print $2}')
 
-# Kill existing Node processes
-echo "Stopping existing Node processes..."
-pkill -f "node.*app" || echo "No existing processes found"
+# If the PID is found, kill the process
+if [ ! -z "$PID" ]; then
+    echo "Killing existing dist/app.js process (PID: $PID)..."
+    kill -9 $PID
+else
+    echo "No existing dist/app.js process found."
+fi
 
 # Clean and create dist directory
 echo "Cleaning build directory..."
@@ -21,10 +26,8 @@ npx tsc
 
 echo "TypeScript compilation complete."
 
-# Start with nohup
-echo "Starting app.js with nohup..."
-nohup node dist/app.js > app.log 2>&1 &
+# Start the dist/app.js process with nohup
+echo "Starting dist/app.js with nohup..."
+nohup node dist/app.js &
 
-echo "Build and deployment complete!"
-echo "API started with nohup - logs in app.log"
-echo "API should be running on http://localhost:3000"
+echo "dist/app.js started with nohup, you can now disconnect safely."
