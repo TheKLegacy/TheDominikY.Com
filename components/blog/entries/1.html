@@ -33,9 +33,9 @@
             &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css"&gt;
             &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"&gt;&lt;/script&gt;&lt;/head&gt;
         &lt;body&gt;
-            &lt;div id="htmxHeader" hx-get="http://thedominiky.com/../v1/htmx/nav" hx-trigger="load"&gt;&lt;/div&gt;
-            &lt;div id="htmxHeader" hx-get="http://thedominiky.com/../v1/htmx/home/content" hx-trigger="load"&gt;&lt;/div&gt;
-            &lt;div id="htmxFooter" hx-get="http://thedominiky.com/../v1/htmx/footer" hx-trigger="load"&gt;&lt;/div&gt;
+            &lt;div id="htmxHeader" hx-get="http://domyakoubek.com/../v1/htmx/nav" hx-trigger="load"&gt;&lt;/div&gt;
+            &lt;div id="htmxHeader" hx-get="http://domyakoubek.com/../v1/htmx/home/content" hx-trigger="load"&gt;&lt;/div&gt;
+            &lt;div id="htmxFooter" hx-get="http://domyakoubek.com/../v1/htmx/footer" hx-trigger="load"&gt;&lt;/div&gt;
         &lt;/body&gt;
         &lt;script&gt;
             function loadContent(apiEndpoint) {
@@ -174,7 +174,7 @@ app.get('/v1/htmx/nav', (req, res) => {
     &lt;nav class="navbar navbar-expand-md navbar-dark bg-dark" id="mynav"&gt;
         &lt;div class="container-fluid"&gt;
             &lt;a class="navbar-brand whitelink" style="font-weight: 900;"
-                hx-get="http://thedominiky.com/../v1/htmx/nav"
+                hx-get="http://domyakoubek.com/../v1/htmx/nav"
                 hx-target="#myHeader" onclick="loadContent('/../v1/htmx/home/content')"
             &gt;[Dominik Yakoubek]&lt;/a&gt;
             &lt;button class="navbar-toggler" type="button" data-toggle="collapse"

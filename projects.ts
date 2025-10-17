@@ -20,7 +20,7 @@ const projects: Project[] = [
         image: "assets/imgs/drafterredraft.png",
         description:
             "Fantasy Draftr is a fantasy football web application that allows users to create and manage fantasy football boards with real-time player statistics and interactive drafting features.",
-        link: "fantasydraftr.com",
+        link: "http://fantasydraftr.com",
         linkText: "click here",
     },
     {
@@ -64,7 +64,7 @@ const projects: Project[] = [
         image: "rby2k20/images/alphalogobig.png",
         description:
             "RBY2k20 is a Generation 1 competitive Pokémon community. The website developed by myself contains a Pokédex and simple CMS. To see it",
-        link: "http://thedominiky.com/rby2k20/",
+        link: "http://domyakoubek.com/rby2k20/",
         linkText: "click here",
     },
     {
