@@ -21,10 +21,6 @@
     </head>
 <body>
 	<div class="articles_body" align="left" id="display"></div>
-
-
-
-
 	<script>
 			function parseData(theData){
 				var Dates = "";

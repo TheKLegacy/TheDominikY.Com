@@ -37,7 +37,7 @@ const projects = [
         createDate: "2020",
         stopDate: "2020",
         lang: ["JavaScript", "CSS3", "HTML5", "PHP"],
-        image: "rby2k20/images/alphalogobig.png",
+        image: "rby2k20/imgs/alphalogobig.png",
         description:
             "RBY2k20 is a Generation 1 competitive Pokémon community. The website developed by myself contains a Pokédex and simple CMS. To see it",
         link: "http://thedominiky.com/rby2k20/",
