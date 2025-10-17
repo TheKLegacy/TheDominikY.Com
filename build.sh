@@ -34,9 +34,10 @@ mkdir -p dist
 # Compile TypeScript to JavaScript
 echo "Compiling TypeScript..."
 npx tsc
+COMPILE_STATUS=$?
 
 # Check if compilation was successful
-if [ $? -eq 0 ]; then
+if [ $COMPILE_STATUS -eq 0 ]; then
     echo "TypeScript compilation successful."
     
     # Check if we're on Windows (Git Bash/WSL) or Unix
