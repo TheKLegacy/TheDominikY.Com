@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
+import path from "path";
 
 const Html = require("./html");
 const Blog = require("./blog");
@@ -6,6 +7,9 @@ const Projects = require("./projects");
 
 const app = express();
 const port: number = 3000;
+
+// Serve static files from assets directory
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");

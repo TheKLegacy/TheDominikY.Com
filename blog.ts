@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs';
+import path from 'path';
 
 interface BlogEntry {
     id: number;
@@ -9,7 +10,9 @@ interface BlogEntry {
 class Blog {
     static async getCards(filter?: string, sort?: string): Promise<string> {
         try {
-            const data = await fs.readFile('components/blog/blogEntries.json', 'utf8');
+            // Resolve path relative to project root (one level up from dist folder)
+            const jsonPath = path.resolve(__dirname, '..', 'components/blog/blogEntries.json');
+            const data = await fs.readFile(jsonPath, 'utf8');
             const jsonData: BlogEntry[] = JSON.parse(data);
             let cards = "";
 

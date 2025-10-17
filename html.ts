@@ -2,6 +2,7 @@ const fs = require('fs');
 const he = require('he'); 
 const cheerio = require('cheerio');
 import * as Handlebars from "handlebars";
+import path from "path";
 
 interface StandardPageParams {
     nav: string;
@@ -34,13 +35,15 @@ class Html {
             res.send(html);
         } catch (error) {
             console.error('Error constructing standard page:', error);
-            throw error;
+            res.status(500).send('Internal Server Error');
         }
     }
     
-    static async loadHtmlFile(path: string, shouldDecode: boolean = true): Promise<string> {
+    static async loadHtmlFile(filePath: string, shouldDecode: boolean = true): Promise<string> {
         try {
-            let data: string = await fs.promises.readFile(path, 'utf8');
+            // Resolve path relative to project root (one level up from dist folder)
+            const absolutePath = path.resolve(__dirname, '..', filePath);
+            let data: string = await fs.promises.readFile(absolutePath, 'utf8');
             data = shouldDecode ? he.decode(data) : data;
             return data;
         } catch (error) {
