@@ -1,4 +1,16 @@
-const projects = [
+interface Project {
+    id: string;
+    name: string;
+    createDate: string;
+    stopDate: string;
+    lang: string[];
+    image: string;
+    description: string;
+    link?: string;
+    linkText?: string;
+}
+
+const projects: Project[] = [
     {
         id: "build-a-metagame",
         name: "Build A Metagame",
@@ -65,7 +77,7 @@ const projects = [
     },
 ];
 
-function generateProjectHTML(project) {
+function generateProjectHTML(project: Project): string {
     let html = `
         <div class="project-item container" data-id="${
             project.id
@@ -103,18 +115,18 @@ function generateProjectHTML(project) {
     return html;
 }
 
-function displayProjects(searchFilter, sort, direction) {
-    let filteredProjects = [...projects]
+function displayProjects(searchFilter?: string, sort?: string, direction?: string): string {
+    let filteredProjects: Project[] = [...projects];
 
     if (searchFilter) {
-        filteredProjects = projects.filter((proj) =>
-            [proj.name, proj.description].some((field) =>
+        filteredProjects = projects.filter((proj: Project) =>
+            [proj.name, proj.description].some((field: string) =>
                 field.toLowerCase().includes(searchFilter.toLowerCase())
             )
         );
     }
 
-    const sortKey =
+    const sortKey: keyof Project | null =
         sort === "alpha"
             ? "name"
             : sort === "date"
@@ -124,14 +136,14 @@ function displayProjects(searchFilter, sort, direction) {
             : null;
 
     if (sortKey) {
-        filteredProjects.sort((a, b) =>
+        filteredProjects.sort((a: Project, b: Project) =>
             direction === "asc"
-                ? a[sortKey].localeCompare(b[sortKey])
-                : b[sortKey].localeCompare(a[sortKey])
+                ? String(a[sortKey]).localeCompare(String(b[sortKey]))
+                : String(b[sortKey]).localeCompare(String(a[sortKey]))
         );
     }
 
     return filteredProjects.map(generateProjectHTML).join("");
 }
 
-module.exports = { displayProjects };
+export = { displayProjects };
